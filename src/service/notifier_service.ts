@@ -1,6 +1,7 @@
 import { NOTIFIER_SHEET } from "./sheets";
 
 export class NotifierService {
+  // メール本文
   getMessage(): string {
     let result = "";
     // header
@@ -24,23 +25,30 @@ export class NotifierService {
     return result;
   }
 
+  // 送信先アドレス
+  getMailTo(): string {
+    return NOTIFIER_SHEET?.getRange("F6").getValue() as string;
+  }
+
+  // 件名
+  getSubject(): string {
+    return NOTIFIER_SHEET?.getRange("F3").getValue() as string;
+  }
+
+  // 差出人
+  getFromName(): string {
+    return NOTIFIER_SHEET?.getRange("F9").getValue() as string;
+  }
+
+  // プレビュー
   preview(message: string): void {
     NOTIFIER_SHEET?.getRange("D3").setValue(message);
     Browser.msgBox("Successful to generate mail");
   }
 
-  getMailTo(): string {
-    // 送信先アドレス
-    return NOTIFIER_SHEET?.getRange("F6").getValue() as string;
-  }
-
-  getSubject(): string {
-    // 件名
-    return NOTIFIER_SHEET?.getRange("F3").getValue() as string;
-  }
-
-  getFromName(): string {
-    // 差出人
-    return NOTIFIER_SHEET?.getRange("F9").getValue() as string;
+	// 最終送信日を記録
+  setFinalSendTime(): void {
+    const today: Date = new Date();
+    NOTIFIER_SHEET?.getRange("F12").setValue(today);
   }
 }

@@ -22,4 +22,5 @@ global.preview = () => {
 // send button
 global.sendMail = () => {
   mailClient.send(mailTo, subject, fromName, message);
+  notifierService.setFinalSendTime();
 };
