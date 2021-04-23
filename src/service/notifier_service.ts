@@ -1,7 +1,7 @@
 import { NOTIFIER_SHEET } from "./sheets";
 
 export class NotifierService {
-  loadTemplate(): string {
+  getMessage(): string {
     let result = "";
     // header
     result += NOTIFIER_SHEET?.getRange("B3").getValue();
@@ -12,11 +12,6 @@ export class NotifierService {
     // footer
     result += NOTIFIER_SHEET?.getRange("B25").getValue();
     result += "\n\n";
-    return result;
-  }
-
-  getMessage(): string {
-    let result: string = this.loadTemplate();
 
     // プレースホルダーに挿入
     // FIXME: 実装する
