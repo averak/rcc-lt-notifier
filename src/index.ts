@@ -1,19 +1,25 @@
 import { MailClient } from "./client";
-import { MessageGenerator } from "./message";
+import { NotifierService } from "./service";
 
 declare const global: {
   [x: string]: any;
 };
 
 const mailClient = new MailClient();
-const messageGenerator = new MessageGenerator();
+const notifierService = new NotifierService();
+
+// mail
+const mailTo: string = notifierService.getMailTo();
+const subject: string = notifierService.getSubject();
+const fromName: string = notifierService.getFromName();
+const message: string = notifierService.getMessage();
 
 // preview button
 global.preview = () => {
-  messageGenerator.preview();
+  notifierService.preview(message);
 };
 
 // send button
 global.sendMail = () => {
-  mailClient.send("hello");
+  mailClient.send(mailTo, subject, fromName, message);
 };

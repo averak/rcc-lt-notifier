@@ -1,11 +1,15 @@
-import { Client } from "./client";
-
-export class MailClient extends Client {
-  onInit(): void {
+export class MailClient {
+  constructor() {
     return;
   }
 
-  send(message: string): void {
+  send(
+    mailTo: string,
+    subject: string,
+    fromName: string,
+    message: string
+  ): void {
+    GmailApp.sendEmail(mailTo, subject, message, { name: fromName });
     Browser.msgBox("Successful to send mail");
   }
 }
