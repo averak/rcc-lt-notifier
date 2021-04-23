@@ -46,7 +46,7 @@ export class NotifierService {
     Browser.msgBox("Successful to generate mail");
   }
 
-	// 最終送信日を記録
+  // 最終送信日を記録
   setFinalSendTime(): void {
     const today: Date = new Date();
     NOTIFIER_SHEET?.getRange("F12").setValue(today);
