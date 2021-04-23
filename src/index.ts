@@ -1,28 +1,24 @@
 import { MailClient } from "./client";
-import { NotifierService, PICService } from "./service";
+import { NotifierService } from "./service";
 
 declare const global: {
   [x: string]: any;
 };
 
+// mail settings
 const mailClient = new MailClient();
-const notifierService = new NotifierService();
-const picService = new PICService();
-
-// mail
-const mailTo: string = notifierService.getMailTo();
-const subject: string = notifierService.getSubject();
-const fromName: string = notifierService.getFromName();
-const message: string = notifierService.getMessage();
+const mailTo: string = NotifierService.getMailTo();
+const subject: string = NotifierService.getSubject();
+const fromName: string = NotifierService.getFromName();
+const message: string = NotifierService.getMessage();
 
 // preview button
 global.preview = () => {
-  notifierService.preview(message);
-  picService.loadNextWeekPIC();
+  NotifierService.preview(message);
 };
 
 // send button
 global.sendMail = () => {
   mailClient.send(mailTo, subject, fromName, message);
-  notifierService.setFinalSendTime();
+  NotifierService.setFinalSendTime();
 };

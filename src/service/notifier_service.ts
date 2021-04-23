@@ -1,8 +1,9 @@
-import { NOTIFIER_SHEET } from "./sheets";
+import { NOTIFIER_SHEET, PIC_SHEET_URL, DELAY_SHEET_URL } from "./sheets";
+import { PIC, PICService } from "./pic_service";
 
 export class NotifierService {
   // メール本文
-  getMessage(): string {
+  static getMessage(): string {
     let result = "";
     // header
     result += NOTIFIER_SHEET?.getRange("B3").getValue();
@@ -14,40 +15,56 @@ export class NotifierService {
     result += NOTIFIER_SHEET?.getRange("B25").getValue();
     result += "\n\n";
 
-    // プレースホルダーに挿入
-    // FIXME: 実装する
-    result = result.replace(
-      "${pic_list}",
-      "　- 山田 太郎『サルでもわかるgit入門』"
-    );
-    result = result.replace("${delay_list}", "　- 田中 花子：2週間遅れ");
+    const today: Date = new Date();
+    const picList: PIC[] = PICService.loadNextWeekPIC();
+    let picListMessage = "";
+    let delayListMessage = "";
+    picList.forEach((pic) => {
+      // person in charge
+      if (pic.status == "未") {
+        picListMessage += `  - ${pic.name}『${pic.title}』\n`;
+      }
+      // delay
+      if (pic.status == "遅") {
+        // number of delayed week
+        const nWeek: number = Math.floor(
+          (today.getTime() - pic.date.getTime()) / 86400000 / 7
+        );
+        delayListMessage += `  - ${pic.name}：${nWeek}\n`;
+      }
+    });
+    // insert to placeholder
+    result = result.replace("${pic_list}\n", picListMessage);
+    result = result.replace("${delay_list}\n", delayListMessage);
+    result = result.replace("${pic_sheet_url}", PIC_SHEET_URL);
+    result = result.replace("${delay_sheet_url}", DELAY_SHEET_URL);
 
     return result;
   }
 
   // 送信先アドレス
-  getMailTo(): string {
+  static getMailTo(): string {
     return NOTIFIER_SHEET?.getRange("F6").getValue() as string;
   }
 
   // 件名
-  getSubject(): string {
+  static getSubject(): string {
     return NOTIFIER_SHEET?.getRange("F3").getValue() as string;
   }
 
   // 差出人
-  getFromName(): string {
+  static getFromName(): string {
     return NOTIFIER_SHEET?.getRange("F9").getValue() as string;
   }
 
   // プレビュー
-  preview(message: string): void {
+  static preview(message: string): void {
     NOTIFIER_SHEET?.getRange("D3").setValue(message);
-    Browser.msgBox("Successful to generate mail");
+    Browser.msgBox("Successful to make preview");
   }
 
   // 最終送信日を記録
-  setFinalSendTime(): void {
+  static setFinalSendTime(): void {
     const today: Date = new Date();
     NOTIFIER_SHEET?.getRange("F12").setValue(today);
   }

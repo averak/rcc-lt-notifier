@@ -1,6 +1,6 @@
 import { PIC_SHEET } from "./sheets";
 
-type PIC = {
+export type PIC = {
   date: Date;
   name: string;
   status: string;
@@ -8,11 +8,7 @@ type PIC = {
 };
 
 export class PICService {
-  constructor() {
-    return;
-  }
-
-  loadNextWeekPIC(): PIC[] {
+  static loadNextWeekPIC(): PIC[] {
     const result: PIC[] = [];
 
     // range settings
