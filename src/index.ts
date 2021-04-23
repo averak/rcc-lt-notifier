@@ -18,7 +18,7 @@ const message: string = notifierService.getMessage();
 // preview button
 global.preview = () => {
   notifierService.preview(message);
-  picService.loadPIC();
+  picService.loadNextWeekPIC();
 };
 
 // send button

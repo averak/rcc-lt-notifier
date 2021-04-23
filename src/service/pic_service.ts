@@ -12,7 +12,7 @@ export class PICService {
     return;
   }
 
-  loadPIC(): PIC[] {
+  loadNextWeekPIC(): PIC[] {
     const result: PIC[] = [];
 
     // range settings
@@ -31,7 +31,8 @@ export class PICService {
       return result;
     }
 
-    let currentDate: Date = new Date();
+    const today: Date = new Date();
+    let date: Date = new Date();
     for (let i = 0; i < END_ROW; i++) {
       const name: string = cells[i][1] || "";
       const title: string = cells[i][3] || "未入力";
@@ -43,11 +44,21 @@ export class PICService {
       }
 
       // update date
-      currentDate = cells[i][0] ? new Date(cells[i][0]) : currentDate;
+      date = cells[i][0] ? new Date(cells[i][0]) : date;
+
+      // only next week
+      if (status == "終") {
+        continue;
+      }
+      if (status == "未") {
+        if ((date.getTime() - today.getTime()) / 86400000 > 7) {
+          continue;
+        }
+      }
 
       // create person
       const person: PIC = {
-        date: currentDate,
+        date: date,
         name: name,
         status: status,
         title: title,
