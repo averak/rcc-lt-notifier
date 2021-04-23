@@ -1,6 +1,7 @@
 # RCC LT Notifier
 
 ![code check](https://github.com/averak/rcc-lt-notifier/workflows/code%20check/badge.svg)
+![deploy](https://github.com/averak/rcc-lt-notifier/workflows/deploy/badge.svg)
 [![MIT License](http://img.shields.io/badge/license-MIT-blue.svg?style=flat)](LICENSE)
 
 次週の LT 担当者にメールで通知する GAS プロジェクト
