@@ -31,7 +31,7 @@ export class PICService {
     let date: Date = new Date();
     for (let i = 0; i < END_ROW; i++) {
       const name: string = cells[i][1] || "";
-      const title: string = cells[i][3] || "未入力";
+      const title: string = cells[i][3] || "タイトル未定";
       const status: string = cells[i][2] || "未";
 
       // name is not set

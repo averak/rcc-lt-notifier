@@ -25,12 +25,12 @@ export class NotifierService {
         picListMessage += `  - ${pic.name}『${pic.title}』\n`;
       }
       // delay
-      if (pic.status == "遅") {
+      if (pic.status == "延") {
         // number of delayed week
         const nWeek: number = Math.floor(
           (today.getTime() - pic.date.getTime()) / 86400000 / 7
         );
-        delayListMessage += `  - ${pic.name}：${nWeek}\n`;
+        delayListMessage += `  - ${pic.name}：${nWeek}週遅れ\n`;
       }
     });
     // insert to placeholder
