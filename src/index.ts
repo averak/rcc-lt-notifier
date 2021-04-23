@@ -1,4 +1,19 @@
-import { Client, MailClient } from "./client";
+import { MailClient } from "./client";
+import { MessageGenerator } from "./message";
 
-const mailClient: Client = new MailClient();
-mailClient.send("hello");
+declare const global: {
+  [x: string]: any;
+};
+
+const mailClient = new MailClient();
+const messageGenerator = new MessageGenerator();
+
+// preview button
+global.preview = () => {
+  messageGenerator.preview();
+};
+
+// send button
+global.sendMail = () => {
+  mailClient.send("hello");
+};

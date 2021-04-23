@@ -5,7 +5,7 @@ export class MailClient extends Client {
     return;
   }
 
-  send(message: string): boolean {
-    return true;
+  send(message: string): void {
+    Browser.msgBox("Successful to send mail");
   }
 }

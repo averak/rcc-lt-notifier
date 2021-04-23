@@ -8,7 +8,7 @@
   "scripts": {
     "publish": "yarn run build && yarn run deploy",
     "build": "webpack",
-    "deploy": "clasp push -f && clasp deploy",
+    "deploy": "clasp push -f",
     "check": "npm-run-all check:*",
     "check:format": "prettier --check src",
     "check:lint": "eslint src",

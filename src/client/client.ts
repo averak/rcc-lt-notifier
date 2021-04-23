@@ -5,5 +5,5 @@ export abstract class Client {
 
   abstract onInit(): void;
 
-  abstract send(message: string): boolean;
+  abstract send(message: string): void;
 }
