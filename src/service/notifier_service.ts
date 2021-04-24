@@ -60,7 +60,7 @@ export class NotifierService {
   // プレビュー
   static preview(message: string): void {
     NOTIFIER_SHEET?.getRange("D3").setValue(message);
-    Browser.msgBox("Successful to make preview");
+    Browser.msgBox("プレビューを生成しました");
   }
 
   // 最終送信日を記録
