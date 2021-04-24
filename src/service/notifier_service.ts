@@ -27,7 +27,7 @@ export class NotifierService {
       // delay
       if (pic.status == "延") {
         // number of delayed week
-        const nWeek: number = Math.floor(
+        const nWeek: number = Math.ceil(
           (today.getTime() - pic.date.getTime()) / 86400000 / 7
         );
         delayListMessage += `  - ${pic.name}：${nWeek}週遅れ\n`;
