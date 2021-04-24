@@ -13,8 +13,8 @@ export class PICService {
 
     // range settings
     const START_COL = 2;
-    const END_COL = 5;
     const START_ROW = 3;
+    const END_COL = 5;
     const END_ROW = 100;
 
     const cells: string[][] | undefined = PIC_SHEET?.getSheetValues(

@@ -1,5 +1,5 @@
 import { MailClient } from "./client";
-import { NotifierService } from "./service";
+import { NotifierService, DelayService } from "./service";
 
 declare const global: {
   [x: string]: any;
@@ -21,4 +21,15 @@ global.preview = () => {
 global.sendMail = () => {
   mailClient.send(mailTo, subject, fromName, message);
   NotifierService.setFinalSendTime();
+};
+
+// update delay status
+global.onOpen = () => {
+  DelayService.updateBoard();
+};
+global.onChange = () => {
+  DelayService.updateBoard();
+};
+global.onEdit = () => {
+  DelayService.updateBoard();
 };
