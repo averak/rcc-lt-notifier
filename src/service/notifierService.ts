@@ -1,5 +1,5 @@
 import { NOTIFIER_SHEET, PIC_SHEET_URL, DELAY_SHEET_URL } from "./sheets";
-import { PIC, PICService } from "./pic_service";
+import { PIC, PICService } from "./picService";
 
 export class NotifierService {
   // メール本文

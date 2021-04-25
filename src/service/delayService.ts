@@ -1,5 +1,5 @@
 import { DELAY_SHEET } from "./sheets";
-import { PIC, PICService } from "./pic_service";
+import { PIC, PICService } from "./picService";
 
 export class DelayService {
   static updateBoard(): void {
